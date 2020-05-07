@@ -1,8 +1,11 @@
 import Project from '../models/project';
+import Task from '../models/task';
 
 export async function getProjects(req, res) {
     try {
-        const projects = await Project.findAll();
+        const projects = await Project.findAll({
+            include: Task
+        });
         res.json({
             data: projects
         });
@@ -20,7 +23,8 @@ export async function getProjectById(req, res) {
         const project = await Project.findOne({
             where: {
                 id: projectId
-            }
+            },
+            include: Task
         });
         
         if (!project) return res.status(404).json('Project not found');

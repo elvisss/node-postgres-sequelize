@@ -1,4 +1,5 @@
 import Task from '../models/task';
+import Project from '../models/project';
 
 export async function getTasks(req, res) {
     try {
@@ -44,7 +45,8 @@ export async function getTaskById(req, res) {
             where: {
                 id: taskId
             },
-            attributes: ['id', 'projectid', 'nombre', 'done']
+            attributes: ['id', 'projectid', 'nombre', 'done'],
+            // include: Project
         });
         
         if (!task) return res.status(404).json('Task not found');

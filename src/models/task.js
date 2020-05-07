@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import { sequelize } from '../database/database';
 
-const Task = sequelize.define('tasks', {
+const Task = sequelize.define('task', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -16,7 +16,8 @@ const Task = sequelize.define('tasks', {
         type: Sequelize.INTEGER
     }
 }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
 });
 
 export default Task;

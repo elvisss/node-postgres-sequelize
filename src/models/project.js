@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import { sequelize } from '../database/database';
 import Task from './task';
 
-const Project = sequelize.define('projects', {
+const Project = sequelize.define('project', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -20,10 +20,11 @@ const Project = sequelize.define('projects', {
         type: Sequelize.DATE
     }
 }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
 });
 
-Project.hasMany(Task, { foreingKey: 'projectid', sourceKey: 'id' });
-Task.belongsTo(Project, { foreingKey: 'projectid', sourceKey: 'id' });
+Project.hasMany(Task, { foreignKey: 'projectid', sourceKey: 'id' });
+Task.belongsTo(Project, { foreignKey: 'projectid', sourceKey: 'id' });
 
 export default Project;
